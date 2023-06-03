@@ -478,7 +478,7 @@ function Object:Refresh()
     end
 end
 
-game.RunService.Stepped:Connect(function()
+game.RunService.RenderStepped:Connect(function()
     for i, Object in next, ESP.Objects do
         Object:Refresh()
     end
