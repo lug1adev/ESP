@@ -3,9 +3,9 @@ assert(Drawing, "missing dependency: 'Drawing'");
 -- variables
 local lib = {
     name = true,
-    boxOutline = true
+    boxOutline = true,
     box = true,
-    healthOutline = true
+    healthOutline = true,
     health = true,
     cache = {}
 }
