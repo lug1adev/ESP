@@ -6,13 +6,13 @@ local lib = {
     boxOutline = true
     box = true,
     healthOutline = true
-    health = true
+    health = true,
+    cache = {}
 }
 local players = game:GetService("Players");
 local runService = game:GetService("RunService");
 local localPlayer = players.LocalPlayer;
 local camera = workspace.CurrentCamera;
-local cache = {};
 
 -- constants
 local BOX_OUTLINE_COLOR = Color3.new(0, 0, 0);
@@ -54,7 +54,7 @@ local function createEsp(player)
     local health = Drawing.new("Line");
     health.Thickness = 1;
 
-    cache[player] = {
+     lib.cache[player] = {
         box = box,
         boxOutline = boxOutline,
         name = name,
@@ -64,18 +64,18 @@ local function createEsp(player)
 end
 
 local function removeEsp(player)
-    local esp = cache[player];
+    local esp =  lib.cache[player];
     if not esp then return end
 
     for _, drawing in pairs(esp) do
         drawing:Remove();
     end
 
-    cache[player] = nil;
+    lib.cache[player] = nil;
 end
 
 local function updateEsp()
-    for player, esp in pairs(cache) do
+    for player, esp in pairs(lib.cache) do
         local character, team = player.Character, player.Team;
         if character and (not team or team ~= localPlayer.Team) then
             local cframe = character:GetModelCFrame();
